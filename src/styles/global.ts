@@ -270,6 +270,17 @@ export default createGlobalStyle`
     }
   }
 
+  .erro {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    font-size: 2rem;
+    color: ${({ theme }) => theme.primary};
+    @media (max-width: 800px){
+      padding: 0;
+    }
+  }
+
   .star-1 {
     position: relative;
     height: 4rem;
@@ -300,6 +311,20 @@ export default createGlobalStyle`
   .aviso {
     width: 50%;
     font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    @media (max-width: 1500px){
+      padding: 0;
+    }
+    @media (max-width: 800px){
+      margin-bottom: 1rem;
+    }
+  }
+
+  .avisoErro {
+    width: 50%;
+    font-size: 2rem;
     padding: 1rem;
     text-align: center;
     margin-bottom: 5rem;
@@ -618,7 +643,6 @@ export default createGlobalStyle`
     width: calc(100% / 3);
     height: 100%;
     align-items: center;
-    cursor: pointer;
     column-gap: 1rem;
     @media (max-width: 800px){
       column-gap: 0.5rem;

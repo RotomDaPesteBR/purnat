@@ -1,8 +1,10 @@
+import { ref, set } from 'firebase/database';
 import Head from 'next/head';
 import Link from 'next/link';
 import { lighten } from 'polished';
 import { useState } from 'react';
 import styled from 'styled-components';
+import database from './api/firebase';
 
 const Modal = styled.div`
   position: fixed;
@@ -36,18 +38,71 @@ const UI = styled.div`
   }
 `;
 
+const ModalError = styled.div`
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const Error = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  max-width: 1200px;
+  width: 40vw;
+  height: 40vh;
+  border-radius: 5rem;
+  background: ${({ theme }) => lighten(0.05, theme.secondary)};
+  @media (max-width: 800px) {
+    width: 80vw;
+  }
+  @media (max-width: 425px) {
+    height: 50vh;
+  }
+  @media (max-width: 320px) {
+    height: 40vh;
+  }
+`;
+
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [email, setEmail] = useState('');
+
+  function writeEmail() {
+    let valid = false;
+    const padraoEmail = /^[\w._-]+@[\w._-]+\.[\w]/gi;
+    valid = padraoEmail.test(email);
+    if (email && valid) {
+      const emailConvertido = email.replace(/\./g, ',');
+      set(ref(database, `email/${emailConvertido}`), {
+        email
+      });
+    }
+    return valid;
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    setShowModal(!showModal);
+    const valid = writeEmail();
+    if (valid) {
+      setShowModal(!showModal);
+    } else {
+      setShowError(!showError);
+    }
   }
 
   function handleClick(e) {
     if (e.target.getAttribute('class') != null) {
       if (e.target.getAttribute('class').includes('modal')) {
         setShowModal(false);
+        setShowError(false);
       }
     }
   }
@@ -84,6 +139,18 @@ export default function Home() {
           </UI>
         </Modal>
       ) : null}
+      {showError ? (
+        <ModalError className="modal" onClick={e => handleClick(e)}>
+          <Error>
+            <div className="erro">
+              <h1>Erro!</h1>
+            </div>
+            <p className="avisoErro">
+              Insira um email <strong>válido</strong>
+            </p>
+          </Error>
+        </ModalError>
+      ) : null}
       <header>
         <div className="navbar">
           <img src="/PURNAT.svg" alt="PURNAT" />
@@ -113,6 +180,9 @@ export default function Home() {
                 className="input"
                 type="email"
                 placeholder="seu email mais organizado ;D"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
               />
               <button className="button" type="submit">
                 VEM COM A GENTE!
