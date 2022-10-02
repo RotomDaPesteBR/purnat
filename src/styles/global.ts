@@ -385,7 +385,10 @@ export default createGlobalStyle`
     flex-wrap: wrap-reverse;
     background-image: url('/background-top.svg');
     background-repeat: no-repeat;
-    background-position: 50% -75%;
+    background-position: 50% -140%;
+    @media (max-width: 1440px) {
+      background-position: 50% -75%;
+    }
     @media (max-width: 1100px) {
       background-position: 50% -40%;
     }
