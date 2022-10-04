@@ -188,7 +188,7 @@ export default createGlobalStyle`
     border: 0;
     border-radius: 3.75rem;
     width: auto-fit;
-    font-size: 1.625rem;
+    font-size: 1.5rem;
     margin: 0.25rem;
     display: flex;
     align-items: center;
@@ -208,8 +208,12 @@ export default createGlobalStyle`
     flex-grow: 1;
   }
 
+  #i-3 img{
+    margin-left: 0;
+  }
+
   .info .item img{
-    height: 2.5rem;
+    height: 2.375rem;
     width: auto;
     margin-bottom: 0.2rem;
     margin-left: 0.5rem;
