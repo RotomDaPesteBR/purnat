@@ -130,7 +130,7 @@ export default function Home() {
               <strong>Entre no grupo do WhatsApp</strong> para não perder
               nenhuma aula, também enviaremos por lá ;)
             </div>
-            <Link href="https://web.whatsapp.com/">
+            <Link href="https://chat.whatsapp.com/LcQvmEM7zv97SNLYGtq45b">
               <div className="whatsapp-button">
                 <img src="/whatsapp.svg" alt="" />
                 ENTRAR
@@ -205,22 +205,19 @@ export default function Home() {
         <div className="container">
           <div className="professora">
             <div className="col" id="foto-col">
-              <img src="/OMJ_8039.jpg" alt="" />
+              <img src="/professora.jpg" alt="" />
             </div>
             <div className="col" id="professora-col">
               <div className="infos">
-                <div className="sobre">sobre a professora</div>
+                <div className="sobre">nossa professora</div>
                 <div className="info">HELLEN LIMA</div>
               </div>
-              <p className="texto-sobre">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+              <div className="texto-sobre">
+                Siga nas redes sociais:
+                <Link href="https://www.instagram.com/hellenlimayoga/">
+                  <div className="texto-instagram">@hellenlimayoga</div>
+                </Link>
+              </div>
             </div>
           </div>
           <div className="imagens">

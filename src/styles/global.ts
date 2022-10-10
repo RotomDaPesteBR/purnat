@@ -468,7 +468,7 @@ export default createGlobalStyle`
     width: 100%;
     height: 50vh;
     object-fit: cover;
-    object-position: 0 0%;
+    object-position: center;
     @media (max-width: 800px){
       height: 100%;
     }
@@ -516,10 +516,12 @@ export default createGlobalStyle`
 
   .texto-sobre {
     height: 100%;
+    white-space: nowrap;
     font-size: 1.5rem;
     padding: 1rem;
     display: flex;
     align-items: center;
+    margin-right: 50vw;
     @media (max-width: 1300px){
       font-size: 1.75rem;
     }
@@ -534,7 +536,14 @@ export default createGlobalStyle`
     }
     @media (max-width: 800px){
       font-size: 1.5rem;
+      margin-right: 0;
     }
+  }
+
+  .texto-instagram {
+    padding-left: 0.25rem;
+    color: ${({ theme }) => theme.primary};
+    cursor: pointer;
   }
 
   .imagens {
