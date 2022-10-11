@@ -1,8 +1,11 @@
 import { ref, set } from 'firebase/database';
 import Head from 'next/head';
 import Link from 'next/link';
+import { Router } from 'next/router';
 import { lighten } from 'polished';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+// import ReactPixel from 'react-facebook-pixel';
 import styled from 'styled-components';
 import database from './api/firebase';
 
@@ -74,6 +77,30 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [email, setEmail] = useState('');
+
+  /* const advancedMatching = { em: 'some@email.com' }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching
+
+  const options = {
+    autoConfig: true, // set pixel's autoConfig. More info: https://developers.facebook.com/docs/facebook-pixel/advanced/
+    debug: false // enable logs
+  }; */
+
+  useEffect(() => {
+    import('react-facebook-pixel')
+      .then(x => x.default)
+      .then(ReactPixel => {
+        ReactPixel.init('481317057277677');
+        ReactPixel.pageView();
+
+        Router.events.on('routeChangeComplete', () => {
+          ReactPixel.pageView();
+        });
+      });
+  });
+
+  /* ReactPixel.init('481317057277677');
+
+  ReactPixel.pageView(); */
 
   function writeEmail() {
     let valid = false;
