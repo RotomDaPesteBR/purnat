@@ -1,4 +1,4 @@
-import { child, get, ref, set } from 'firebase/database';
+import { ref, set } from 'firebase/database';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Router } from 'next/router';
@@ -134,7 +134,7 @@ export default function Home() {
     }
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     const referencia = ref(database);
     get(child(referencia, `email/`))
       .then(snapshot => {
@@ -146,7 +146,7 @@ export default function Home() {
         console.log(string);
       })
       .catch(error => console.error(error));
-  }, []);
+  }, []); */
 
   return (
     <div>
