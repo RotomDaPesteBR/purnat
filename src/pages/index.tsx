@@ -1,4 +1,4 @@
-import { ref, set } from 'firebase/database';
+import { child, get, ref, set } from 'firebase/database';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Router } from 'next/router';
@@ -134,6 +134,20 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    const referencia = ref(database);
+    get(child(referencia, `email/`))
+      .then(snapshot => {
+        const valor = snapshot.val();
+        let string = '';
+        Object.values(valor).map(item => {
+          string = `${string}\n${item.email}`;
+        });
+        console.log(string);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
   return (
     <div>
       <Head>
@@ -151,7 +165,7 @@ export default function Home() {
             </div>
             <p className="aviso">
               Você vai receber o link das aulas no seu email todas as semanas a
-              partir do dia 22 de outubro.
+              partir do dia 11 de fevereiro.
             </p>
             <div className="invite">
               <strong>Entre no grupo do WhatsApp</strong> para não perder
@@ -199,8 +213,8 @@ export default function Home() {
               </div>
             </div>
             <p>
-              Aulas de Yoga para iniciantes ao vivo a partir do dia 22 de
-              outubro no canal da purnat no Youtube.
+              Aulas de Yoga para iniciantes ao vivo a partir do dia 11 de
+              fevereiro no canal da purnat no Youtube.
             </p>
             <form className="form" onSubmit={e => handleSubmit(e)}>
               <input
@@ -232,17 +246,17 @@ export default function Home() {
         <div className="container">
           <div className="professora">
             <div className="col" id="foto-col">
-              <img src="/professora.jpg" alt="" />
+              <img draggable="false" src="/alecunha.jpg" alt="" />
             </div>
             <div className="col" id="professora-col">
               <div className="infos">
                 <div className="sobre">nossa professora</div>
-                <div className="info">HELLEN LIMA</div>
+                <div className="info">Ale Cunha</div>
               </div>
               <div className="texto-sobre">
                 Siga nas redes sociais:
-                <Link href="https://www.instagram.com/hellenlimayoga/">
-                  <div className="texto-instagram">@hellenlimayoga</div>
+                <Link href="https://www.instagram.com/alecunhayoga/">
+                  <div className="texto-instagram">@alecunhayoga</div>
                 </Link>
               </div>
             </div>
